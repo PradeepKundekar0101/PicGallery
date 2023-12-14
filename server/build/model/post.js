@@ -11,9 +11,13 @@ const PostSchema = new mongoose_1.default.Schema({
         min: [3, "content must be of atleast 3 characters"],
         required: true
     },
-    image_url: {
+    image_name: {
         type: String,
         required: true
+    },
+    image_url: {
+        type: String,
+        default: ""
     }
 }, {
     timestamps: true

@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 export interface IPost{
     content:string,
+    image_name:string,
     image_url:string,
     createdAt?:Date,
     updatedAt:Date
@@ -11,9 +12,13 @@ const PostSchema = new mongoose.Schema<IPost>({
         min:[3,"content must be of atleast 3 characters"],
         required:true
     },
-    image_url:{
+    image_name:{
         type:String,
         required:true
+    },
+    image_url:{
+        type:String,
+        default:""
     }
 },{
     timestamps:true

@@ -7,6 +7,5 @@ const express_1 = __importDefault(require("express"));
 const post_1 = require("../controllers/post");
 const router = express_1.default.Router();
 router.get("/", post_1.getAllPosts);
-router.post("/", post_1.createPost);
 router.delete("/:postId", post_1.deletePost);
 exports.default = router;

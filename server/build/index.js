@@ -17,10 +17,14 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 const post_1 = __importDefault(require("./routes/post"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const multer_1 = __importDefault(require("multer"));
+const post_2 = require("./controllers/post");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
+const storage = multer_1.default.memoryStorage();
+const upload = (0, multer_1.default)({ storage });
 const connect = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const MONGOURI = process.env.MONGO_URI;
@@ -34,6 +38,7 @@ const connect = () => __awaiter(void 0, void 0, void 0, function* () {
 connect();
 const PORT = process.env.PORT || 8080;
 app.get("/", (req, res) => { res.send("Hello from the backend"); });
+app.post("/api/v1/post", upload.single("image"), post_2.createPost);
 app.use("/api/v1/post", post_1.default);
 app.listen(PORT, () => {
     console.log("Server is up and running at PORT " + PORT);
