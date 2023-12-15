@@ -1,23 +1,24 @@
-# Stage 1: Build stage
-FROM node:latest AS build
+# Stage 1
 
-WORKDIR /usr/src/app
+FROM node:18 as builder
 
-COPY package*.json ./
+WORKDIR /build
+
+COPY package*.json .
 RUN npm install
 
-COPY . .
+COPY . . 
+
 RUN npm run build
 
-# Stage 2: Production stage
-FROM node:alpine
+# Stage 2
 
-WORKDIR /usr/src/app
+FROM node:18 as runner
 
-COPY --from=build /usr/src/app/package*.json ./
-COPY --from=build /usr/src/app/dist ./dist
-RUN npm install --only=prod
+WORKDIR /app
 
-EXPOSE 8080
+COPY --from=builder build/package*.json .
+COPY --from=builder build/node_modules node_modules/
+COPY --from=builder build/build build/
 
-CMD ["npm", "start"]
+CMD [ "npm", "start" ]

@@ -1,7 +1,7 @@
 import { DeleteObjectCommand, GetObjectCommand,PutObjectCommand} from "@aws-sdk/client-s3"
 import { s3Client } from "../config/aws"
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import sharp from 'sharp'
+import sharp = require('sharp')
 export const getObjectURL = async(key:string)=>{
     const command = new GetObjectCommand({
         Key:key,

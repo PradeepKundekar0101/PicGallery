@@ -1,9 +1,9 @@
-import express from 'express';
-import dotenv from 'dotenv'
-import cors from 'cors';
-import postRoutes from './routes/post'
-import mongoose from 'mongoose';
-import multer from 'multer';
+import express = require('express');
+import dotenv = require('dotenv');
+import  cors = require("cors");
+import postRoutes from "./routes/post"
+import  mongoose = require("mongoose");
+import multer = require("multer");
 import { createPost } from './controllers/post';
 dotenv.config();
 
